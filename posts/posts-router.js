@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Posts = require("./posts-model");
 
-router.get("/", (res, res) => {
+router.get("/", (req, res) => {
   Posts.getUsers()
     .then((posts) => {
       res.status(200).json({ data: posts });
