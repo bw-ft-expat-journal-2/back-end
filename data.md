@@ -5,10 +5,12 @@ let users = [
         email: '',
         id: integer,
         admin: boolean,
+        location: '',
+        favorites: ['', '', '']
         posts: [
             {
                 title: '',
-                content: '',
+                contents: '',
                 author: '',
                 imageUrls: [
                     {
@@ -18,6 +20,12 @@ let users = [
                     }
                 ],
             }
-        ]
+        ],
+        friends: [
+            {
+                friendName: '',
+                friendId: '',
+            }
+        ],
     },
 ]
