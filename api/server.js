@@ -7,7 +7,7 @@ const authenticate = require("../auth/auth-middleware");
 
 const usersRouter = require('../users/users-router')
 const postsRouter = require('../posts/posts-router')
-// const imagesRouter = require('')
+const imagesRouter = require('../images/images-router')
 
 const server = express();
 
@@ -22,6 +22,6 @@ server.get("/", (req, res) => {
 server.use("/api/auth", authRouter);
 server.use('/api/users', authenticate, usersRouter)
 server.use('/api/posts', authenticate, postsRouter)
-// server.use('/api/images', authenticate, imagesRouter)
+server.use('/api/images', authenticate, imagesRouter)
 
 module.exports = server;
