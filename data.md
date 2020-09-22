@@ -4,14 +4,12 @@ let users = [
         password: '',
         email: '',
         id: integer,
-        admin: boolean,
         location: '',
         favorites: ['', '', '']
         posts: [
             {
                 title: '',
                 contents: '',
-                author: '',
                 imageUrls: [
                     {
                         url: '',

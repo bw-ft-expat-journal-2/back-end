@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const Users = require("./users-model");
+const Images = require("./images-router");
 
 router.get("/", (req, res) => {
-  Users.getUsers()
-    .then((users) => {
-      res.status(200).json({ data: users });
+  Images.getImages()
+    .then((images) => {
+      res.status(200).json({ data: images });
     })
     .catch((err) => {
       res.status(500).json({ message: err });
@@ -14,12 +14,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  Users.findById()
-    .then((user) => {
-      if (!user) {
-        res.status(404).json({ message: "user not found" });
+  Images.findById()
+    .then((image) => {
+      if (!image) {
+        res.status(404).json({ message: "image not found" });
       } else {
-        res.status(200).json({ data: user });
+        res.status(200).json({ data: image });
       }
     })
     .catch((err) => {
@@ -29,9 +29,9 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
-  Users.update(updatedInfo)
-    .then((user) => {
-      res.status(200).json({ data: user });
+  Images.update(updatedInfo)
+    .then((image) => {
+      res.status(200).json({ data: image });
     })
     .catch((err) => {
       res.status(500).json({ message: err });
@@ -39,12 +39,12 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  Users.remove()
-    .then((user) => {
-      if (!user) {
-        res.status(404).json({ message: "user not found" });
+  Images.remove()
+    .then((image) => {
+      if (!image) {
+        res.status(404).json({ message: "image not found" });
       } else {
-        res.status(200).json({ message: "user successfully deleted" });
+        res.status(200).json({ message: "image successfully deleted" });
       }
     })
     .catch((err) => {
