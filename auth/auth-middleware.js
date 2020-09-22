@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const secrets = require("./secrets");
 
+// authentication middleware prevents acces without JWT
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
   if (token) {
