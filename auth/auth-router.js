@@ -2,14 +2,16 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secrets = require("./secrets");
-const Users = require('../users/users-model')
+const Users = require("../users/users-model");
 
 router.post("/register", (req, res) => {
-  let user = req.body;
-  const rounds = process.env.HASH_ROUNDS || 4;
-  const hash = bcrypt.hashSync(user.password, rounds);
+  let {username, password} = req.body
 
-  user.password = hash;
+  const rounds = process.env.HASH_ROUNDS || 4;
+  // const hash = bcrypt.hashSync(user.password, rounds);
+  const hash = bcrypt.hashSync(password, rounds);
+
+  password = hash;
 
   Users.add(user)
     .then((user) => {
