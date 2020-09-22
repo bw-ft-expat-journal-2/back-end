@@ -24,10 +24,10 @@ function add(image) {
         })
 }
 
-function remove() {
-
+function remove(id) {
+    return db('images').where({ id: id }).first().del()
 }
 
-function update() {
-
+function update(id, image) {
+    return db('images').where({ id: id }).first().update(image)
 }
