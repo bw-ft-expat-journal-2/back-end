@@ -40,7 +40,7 @@ router.put("/:id", (req, res) => {
     Posts.update(id, updatedInfo)
       .then((post) => {
         if (post) {
-          res.status(200).json({ data: post });
+          res.status(200).json({ data: updatedInfo });
         } else {
           res
             .status(404)
