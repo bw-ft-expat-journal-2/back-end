@@ -27,7 +27,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.update("/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
   Posts.update(updatedInfo)
     .then((post) => {

@@ -6,4 +6,4 @@ const environment = process.env.DB_ENV || 'development';
 
 const config = knexConfig[environment]
 
-module.exports = knex(knexConfig);
+module.exports = knex(config);
