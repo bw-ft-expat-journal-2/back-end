@@ -16,7 +16,7 @@ router.post("/register", (req, res) => {
       res.status(201).json({ data: user });
     })
     .catch((error) => {
-      res.status(500).json({ message: "server error" });
+      res.status(500).json({ message: error.message });
     });
 });
 
@@ -40,6 +40,7 @@ router.post("/login", (req, res) => {
     });
 });
 
+// function to create token
 function generateToken(user) {
   const payload = {
     userId: user.id,

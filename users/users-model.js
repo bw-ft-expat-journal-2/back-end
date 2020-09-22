@@ -6,10 +6,15 @@ module.exports = {
   remove,
   update,
   getUsers,
+  findBy
 };
 
 function getUsers() {
   return db("users");
+}
+
+function findBy(filter) {
+  return db('users').where(filter).first()
 }
 
 function findById(id) {
