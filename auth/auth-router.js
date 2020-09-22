@@ -5,13 +5,17 @@ const secrets = require("./secrets");
 const Users = require("../users/users-model");
 
 router.post("/register", (req, res) => {
-  let {username, password} = req.body
-
+  // let user = req.body;
+  let user = {
+    username: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    location: req.body.location
+  };
   const rounds = process.env.HASH_ROUNDS || 4;
-  // const hash = bcrypt.hashSync(user.password, rounds);
-  const hash = bcrypt.hashSync(password, rounds);
+  const hash = bcrypt.hashSync(user.password, rounds);
 
-  password = hash;
+  user.password = hash;
 
   Users.add(user)
     .then((user) => {
