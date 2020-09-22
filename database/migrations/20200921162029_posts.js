@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable("posts", (posts) => {
-    posts.increment();
+    posts.increments();
     posts.string("title", 255).notNullable();
     posts.string("contents", 5000).notNullable();
     posts

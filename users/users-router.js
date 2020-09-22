@@ -14,7 +14,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  Users.findById()
+  const id = req.params.id
+  Users.findById(id)
     .then((user) => {
       if (!user) {
         res.status(404).json({ message: "user not found" });
@@ -29,6 +30,7 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
+  const id = req.params.id
   Users.update(updatedInfo)
     .then((user) => {
       res.status(200).json({ data: user });
@@ -39,7 +41,8 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  Users.remove()
+  const id = req.params.id
+  Users.remove(id)
     .then((user) => {
       if (!user) {
         res.status(404).json({ message: "user not found" });

@@ -14,7 +14,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  Images.findById()
+  const id = req.params.id
+  Images.findById(id)
     .then((image) => {
       if (!image) {
         res.status(404).json({ message: "image not found" });
@@ -29,6 +30,7 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
+  const id = req.params.id
   Images.update(updatedInfo)
     .then((image) => {
       res.status(200).json({ data: image });
@@ -39,7 +41,8 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  Images.remove()
+  const id = req.params.id
+  Images.remove(id)
     .then((image) => {
       if (!image) {
         res.status(404).json({ message: "image not found" });
