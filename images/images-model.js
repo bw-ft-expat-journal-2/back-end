@@ -9,25 +9,25 @@ module.exports = {
 };
 
 function getImages() {
-    return db('images');
+    return db('post-images');
 }
 
 function findById(id) {
-    return db('images').where({ id: id }).first()
+    return db('post-images').where({ posts_id: id }).first()
 }
 
 function add(image) {
-    return db('images')
+    return db('post-images')
         .insert(image, 'id')
         .then((id) => {
             return findById(id)
         })
 }
 
-function remove() {
-
+function remove(id) {
+    return db('post-images').where({ id: id }).first().del()
 }
 
-function update() {
-
+function update(id, image) {
+    return db('post-images').where({ id: id }).first().update(image)
 }

@@ -1,5 +1,5 @@
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const helmet = require("helmet");
 
 // auth router handles register and login, providing JWT
@@ -14,7 +14,7 @@ const imagesRouter = require("../images/images-router");
 const server = express();
 
 server.use(helmet());
-// server.use(cors());
+server.use(cors());
 server.use(express.json());
 
 server.get("/", (req, res) => {

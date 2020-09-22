@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Images = require("./images-router");
+const Images = require("./images-model");
 
 router.get("/", (req, res) => {
   Images.getImages()
@@ -30,14 +30,26 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
-  const id = req.params.id
-  Images.update(updatedInfo)
-    .then((image) => {
-      res.status(200).json({ data: image });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+  const id = req.params.id;
+  if (!updatedInfo.url || !updatedInfo.alt) {
+    res
+      .status(400)
+      .json({ message: "please include url and alt for image" });
+  } else {
+    Images.update(id, updatedInfo)
+      .then((image) => {
+        if (image) {
+          res.status(200).json({ data: updatedInfo });
+        } else {
+          res
+            .status(404)
+            .json({ message: "the post with this id does not exist" });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err });
+      });
+  }
 });
 
 router.delete("/:id", (req, res) => {

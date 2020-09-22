@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   Posts.findById(id)
     .then((post) => {
       if (!post) {
@@ -30,18 +30,30 @@ router.get("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
-  const id = req.params.id
-  Posts.update(updatedInfo)
-    .then((post) => {
-      res.status(200).json({ data: post });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: err });
-    });
+  const id = req.params.id;
+  if (!updatedInfo.title || !updatedInfo.contents) {
+    res
+      .status(400)
+      .json({ message: "please include title and contents for post" });
+  } else {
+    Posts.update(id, updatedInfo)
+      .then((post) => {
+        if (post) {
+          res.status(200).json({ data: updatedInfo });
+        } else {
+          res
+            .status(404)
+            .json({ message: "the post with this id does not exist" });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ message: err });
+      });
+  }
 });
 
 router.delete("/:id", (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
   Posts.remove(id)
     .then((post) => {
       if (!post) {

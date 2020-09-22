@@ -16,7 +16,7 @@ router.post("/register", (req, res) => {
       res.status(201).json({ data: user });
     })
     .catch((error) => {
-      res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error });
     });
 });
 
@@ -24,7 +24,6 @@ router.post("/login", (req, res) => {
   let { username, password } = req.body;
 
   Users.findBy({ username })
-    .first()
     .then((user) => {
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken(user);
