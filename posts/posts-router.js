@@ -37,7 +37,7 @@ router.put("/:id", (req, res) => {
       .status(400)
       .json({ message: "please include title and contents for post" });
   } else {
-    Posts.update(updatedInfo)
+    Posts.update(id, updatedInfo)
       .then((post) => {
         if (post) {
           res.status(200).json({ data: post });

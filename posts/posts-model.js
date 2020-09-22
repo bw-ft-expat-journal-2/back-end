@@ -24,10 +24,10 @@ function add(post) {
         })
 }
 
-function remove() {
-
+function remove(id) {
+    return db('posts').where({ id: id }).first().del()
 }
 
-function update() {
-
+function update(id, post) {
+    return db('posts').where({ id: id }).first().update(post)
 }
