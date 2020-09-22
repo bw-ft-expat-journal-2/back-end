@@ -9,15 +9,15 @@ module.exports = {
 };
 
 function getImages() {
-    return db('images');
+    return db('post-images');
 }
 
 function findById(id) {
-    return db('images').where({ id: id }).first()
+    return db('post-images').where({ id: id }).first()
 }
 
 function add(image) {
-    return db('images')
+    return db('post-images')
         .insert(image, 'id')
         .then((id) => {
             return findById(id)
@@ -25,9 +25,9 @@ function add(image) {
 }
 
 function remove(id) {
-    return db('images').where({ id: id }).first().del()
+    return db('post-images').where({ id: id }).first().del()
 }
 
 function update(id, image) {
-    return db('images').where({ id: id }).first().update(image)
+    return db('post-images').where({ id: id }).first().update(image)
 }
