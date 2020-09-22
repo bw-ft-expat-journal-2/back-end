@@ -13,7 +13,7 @@ function getImages() {
 }
 
 function findById(id) {
-    return db('post-images').where({ id: id }).first()
+    return db('post-images').where({ posts_id: id }).first()
 }
 
 function add(image) {
