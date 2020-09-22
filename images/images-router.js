@@ -1,33 +1,53 @@
-const dc = require("../database/dbConfig");
+const express = require("express");
+const router = express.Router();
 
-module.exports = {
-  findById,
-  add,
-  remove,
-  update,
-  getImages,
-};
+const Images = require("./images-router");
 
-function getImages() {
-    return db('images');
-}
+router.get("/", (req, res) => {
+  Images.getImages()
+    .then((images) => {
+      res.status(200).json({ data: images });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
+});
 
-function findById(id) {
-    return db('images').where({ id: id }).first()
-}
+router.get("/:id", (req, res) => {
+  Images.findById()
+    .then((image) => {
+      if (!image) {
+        res.status(404).json({ message: "image not found" });
+      } else {
+        res.status(200).json({ data: image });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
+});
 
-function add(image) {
-    return db('images')
-        .insert(image, 'id')
-        .then((id) => {
-            return findById(id)
-        })
-}
+router.put("/:id", (req, res) => {
+  const updatedInfo = req.body;
+  Images.update(updatedInfo)
+    .then((image) => {
+      res.status(200).json({ data: image });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
+});
 
-function remove() {
-
-}
-
-function update() {
-
-}
+router.delete("/:id", (req, res) => {
+  Images.remove()
+    .then((image) => {
+      if (!image) {
+        res.status(404).json({ message: "image not found" });
+      } else {
+        res.status(200).json({ message: "image successfully deleted" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
+});
