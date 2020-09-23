@@ -28,6 +28,21 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  const post = req.body;
+  Posts.add(post)
+    .then((post) => {
+      if (!post.title || !post.contents) {
+        res.status(401).json({ message: "please include title and contents" });
+      } else {
+        res.status(201).json({ data: post });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
+});
+
 router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
   const id = req.params.id;
