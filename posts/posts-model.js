@@ -16,12 +16,19 @@ function findById(id) {
     return db('posts').where({ id: id }).first()
 }
 
+// function add(post) {
+//     return db('posts')
+//         .insert(post, 'id')
+//         .then((id) => {
+//             return findById(id)
+//         })
+// }
+
 function add(post) {
-    return db('posts')
-        .insert(post, 'id')
-        .then((id) => {
-            return findById(id)
-        })
+	return db('posts').insert(post, 'id').then((ids) => {
+		const [ id ] = ids;
+		return findById({ id });
+	});
 }
 
 function remove(id) {

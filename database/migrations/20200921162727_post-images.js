@@ -1,6 +1,6 @@
 exports.up = function (knex) {
   return knex.schema.createTable("post-images", (images) => {
-    images.increments();
+    images.increments().primary();
     images.string("url", 255).notNullable();
     images.string("alt", 100).notNullable();
     images
