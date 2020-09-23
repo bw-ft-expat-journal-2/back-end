@@ -27,7 +27,7 @@ function findById(id) {
 function add(post) {
 	return db('posts').insert(post, 'id').then((ids) => {
 		const [ id ] = ids;
-		return findById({ id });
+		return findById(id);
 	});
 }
 
