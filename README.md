@@ -28,6 +28,10 @@ Posts
 - https://expatjournal-backend.herokuapp.com/api/posts
 - Same deal as the one above, should be able to perform all basic steps from this. Please include an id in the URL where appropriate.
 
+Images
+- https://expatjournal-backend.herokuapp.com/api/images
+- Same as above, full CRUD functionality here. I've seeded some images as well for you to use
+
 ## Seed Data
 
 I've included some post and user seed data, so if you need to do some get requests you'll at least pull in something to display from it. Once you start populating more data with post requests there will be plenty more to pull from.

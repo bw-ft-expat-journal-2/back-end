@@ -28,6 +28,21 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  const image = req.body;
+  Images.add(image)
+    .then((image) => {
+      if (!image.url || !image.alt) {
+        res.status(401).json({ message: "please include title and contents" });
+      } else {
+        res.status(201).json({ data: image });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err });
+    });
+});
+
 router.put("/:id", (req, res) => {
   const updatedInfo = req.body;
   const id = req.params.id;
