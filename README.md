@@ -25,8 +25,10 @@ Users
 - Can add /:id to the end to grab specific items with a get request. You'll also need to have an id to delete or put anything (so the server knows exactly what it is you're planning to update or delete)
 
 Posts
-- https://expatjournal-backend.herokuapp.com/api/posts
+- https://expatjournal-backend.herokuapp.com/api/posts/
 - Same deal as the one above, should be able to perform all basic steps from this. Please include an id in the URL where appropriate.
+- YOU MUST SUPPLY THE USER ID IN THE URL WHEN MAKING A POST REQUEST 
+- example: https://expatjournal-backend.herokuapp.com/api/posts/2 (this would create this post under the user with id 2)
 
 Images
 - https://expatjournal-backend.herokuapp.com/api/images
