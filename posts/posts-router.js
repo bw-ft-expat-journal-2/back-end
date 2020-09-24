@@ -28,10 +28,14 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
-  const post = req.body;
-  Posts.add(post)
+router.post("/:id", (req, res) => {
+  const newPost = req.body;
+  const {id} = req.params
+  console.log(newPost)
+  newPost.users_id = id
+  Posts.add(newPost)
     .then((post) => {
+      console.log(post)
       if (!post.title || !post.contents) {
         res.status(401).json({ message: "please include title and contents" });
       } else {
@@ -39,7 +43,7 @@ router.post("/", (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).json({ message: err });
+      res.status(500).json({ message: err.message });
     });
 });
 
